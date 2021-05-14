@@ -66,10 +66,11 @@ const companies = [
   }
 ];
 
-// Tenho que exibir as seguintes informações:
-// Adicionar o valor Total(somar o valorDeMercado das filiais) da empresa SE tiver capital aberto
-// Exibir apenas empresa com valor total maior que 1000
-// Não exibir as filiais
+// Ao executar o programa devo exibir: na raiz do objeto e empresas
+// para o items que tem capital aberto devo:
+// Adicionar na raiz do objeto valor Total de Mercado (somar o valorDeMercado das filiais)  
+// e Remover o array de filiais de cada empresa
+// Exibir apenas os items com valor total de mercado maior que 1000
  
 // Retorno deve ser
 // [
@@ -83,22 +84,22 @@ const companies = [
 //   ...
 // ]
 
-const mapEmpresas = (item) => {
+const AdicionaNasEmpresasOValorTotalDeMercadoERemoveAsFilias = (item) => {
   {
     const { filiais, ...rest } = item
     return  {
       ...rest,
-      total: item.filiais.reduce(retornaTotalValorDeMercado, 0) 
+      valorTotalDeMercado: filiais.reduce(retornaValorTotalDeMercado, 0) 
     }
   }
 }
 const retornaEmpresasComCapitalAberto = ({ temCapitalAberto }) =>  temCapitalAberto
-const retornaTotalValorDeMercado = (total, { valorDeMercado }) => total + valorDeMercado
-const retornaEmpresasComTotalMaior1000 = ({ total }) => total > 100
+const retornaValorTotalDeMercado = (acumulador, { valorDeMercado }) => acumulador + valorDeMercado
+const retornaEmpresasComValorTotalMaior1000 = ({ valorTotalDeMercado }) => valorTotalDeMercado > 1000
 
 const results = companies
                   .filter(retornaEmpresasComCapitalAberto)
-                  .map(mapEmpresas)
-                  .filter(retornaEmpresasComTotalMaior1000)
+                  .map(AdicionaNasEmpresasOValorTotalDeMercadoERemoveAsFilias)
+                  .filter(retornaEmpresasComValorTotalMaior1000)
 
 console.log(results)
